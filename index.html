@@ -1,65 +1,784 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAT Airsoft</title>
+    <title>BAT Airsoft - Tactical Operations, Events & Gear</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tactical: {
+                            bg: '#0e1117',
+                            card: '#161b22',
+                            border: '#30363d',
+                            accent: '#ff9d00',
+                            accentHover: '#e08b00',
+                            neon: '#10b981',
+                            alert: '#ef4444'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Font & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
         body {
-            background-color: #0d0f12;
-            color: #e2e8f0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #0e1117;
+            color: #f3f4f6;
+            overflow-x: hidden;
         }
-        .card {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 500px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .glass-panel {
+            background: rgba(22, 27, 34, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 157, 0, 0.15);
         }
-        h1 {
-            color: #38bdf8;
-            font-size: 2rem;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
+        .glass-panel:hover {
+            border-color: rgba(255, 157, 0, 0.35);
         }
-        p {
-            color: #94a3b8;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: 24px;
+        .text-glow {
+            text-shadow: 0 0 15px rgba(255, 157, 0, 0.5);
         }
-        .status {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(255, 157, 0, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
     </style>
 </head>
-<body>
-    <div class="card">
-        <h1>BAT AIRSOFT</h1>
-        <p>Website is under development. Stay tuned for updates and gear loadouts.</p>
-        <span class="status">● System Online</span>
+<body class="bg-tactical-bg text-gray-200 antialiased selection:bg-tactical-accent selection:text-black min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-tactical-border/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="p-2.5 bg-tactical-accent/10 rounded-xl border border-tactical-accent/30 group-hover:border-tactical-accent transition-all duration-300">
+                    <i data-lucide="crosshair" class="w-6 h-6 text-tactical-accent"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-wider text-white flex items-center gap-1">
+                        BAT<span class="text-tactical-accent">AIRSOFT</span>
+                    </span>
+                    <span class="block text-[10px] font-mono tracking-widest text-gray-400 -mt-1">BAT-AIRSOFT.ONLINE</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+                <a href="#about" class="hover:text-tactical-accent transition-colors">Field Intel</a>
+                <a href="#rules" class="hover:text-tactical-accent transition-colors">Safety & Rules</a>
+                <a href="#chrono" class="hover:text-tactical-accent transition-colors">FPS Calculator</a>
+                <a href="#events" class="hover:text-tactical-accent transition-colors">Schedule</a>
+                <a href="#loadout" class="hover:text-tactical-accent transition-colors">Loadout Builder</a>
+            </nav>
+
+            <!-- Book CTA Button -->
+            <div class="hidden md:block">
+                <a href="#contact" class="px-5 py-2.5 rounded-lg font-bold text-sm bg-tactical-accent text-black hover:bg-tactical-accentHover transition-all shadow-lg shadow-tactical-accent/20 flex items-center gap-2">
+                    <i data-lucide="ticket" class="w-4 h-4"></i>
+                    Book Ticket
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-tactical-card focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel border-t border-tactical-border px-4 pt-4 pb-6 space-y-3">
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-tactical-accent hover:bg-tactical-card">Field Intel</a>
+            <a href="#rules" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-tactical-accent hover:bg-tactical-card">Safety & Rules</a>
+            <a href="#chrono" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-tactical-accent hover:bg-tactical-card">FPS Calculator</a>
+            <a href="#events" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-tactical-accent hover:bg-tactical-card">Schedule</a>
+            <a href="#loadout" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-tactical-accent hover:bg-tactical-card">Loadout Builder</a>
+            <a href="#contact" class="block text-center w-full mt-2 px-5 py-3 rounded-lg font-bold text-sm bg-tactical-accent text-black hover:bg-tactical-accentHover">Book Ticket</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow pt-20">
+
+        <!-- Hero Section -->
+        <section class="relative min-h-[90vh] flex items-center justify-center bg-grid-pattern overflow-hidden py-16">
+            <!-- Background Glow FX -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-tactical-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tactical-card border border-tactical-accent/30 text-xs font-mono text-tactical-accent mb-6 shadow-md">
+                    <span class="w-2 h-2 rounded-full bg-tactical-neon animate-pulse"></span>
+                    NEXT SKIRMISH: SUNDAY OPERATIONAL
+                </div>
+
+                <h1 class="text-5xl sm:text-7xl font-black text-white tracking-tight uppercase mb-4">
+                    BAT <span class="text-transparent bg-clip-text bg-gradient-to-r from-tactical-accent to-yellow-500 text-glow">AIRSOFT</span>
+                </h1>
+                
+                <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+                    Tactical Airsoft Operations, Close Quarter Combat & Extended Skirmish Events. Dominate the field with precision, honor, and tactical superiority.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#events" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-black bg-tactical-accent hover:bg-tactical-accentHover transition-all shadow-xl shadow-tactical-accent/20 flex items-center justify-center gap-2 group">
+                        <i data-lucide="shield" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        Join Next Game
+                    </a>
+                    <a href="#chrono" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-tactical-card border border-tactical-border hover:border-tactical-accent/50 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5 text-tactical-accent"></i>
+                        FPS & Joules Rules
+                    </a>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="text-3xl font-black text-tactical-accent font-mono">15+</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Acres Field</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="text-3xl font-black text-tactical-accent font-mono">300J</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Max Limits Verified</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="text-3xl font-black text-tactical-accent font-mono">CQB</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Urban Killhouse</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="text-3xl font-black text-tactical-accent font-mono">100%</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Fair Play Honor</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About / Field Intel Section -->
+        <section id="about" class="py-20 bg-tactical-card/40 border-y border-tactical-border/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-mono text-tactical-accent uppercase tracking-widest mb-2">FIELD INTEL</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">THE ULTIMATE AIRSOFT ARENA</p>
+                    <p class="text-gray-400 mt-3">Engineered for intense CQB battles and extended tactical outdoor maneuvers. Designed by airsofters, for airsofters.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Feature Card 1 -->
+                    <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-xl bg-tactical-accent/10 border border-tactical-accent/30 flex items-center justify-center text-tactical-accent mb-4 group-hover:bg-tactical-accent group-hover:text-black transition-colors">
+                            <i data-lucide="building-2" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">CQB Killhouse</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Multi-room, high-intensity close quarter environment with tactical breaching doors and narrow corridors.</p>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-xl bg-tactical-accent/10 border border-tactical-accent/30 flex items-center justify-center text-tactical-accent mb-4 group-hover:bg-tactical-accent group-hover:text-black transition-colors">
+                            <i data-lucide="trees" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Woodland Skirmish</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">12+ acres of dense forest terrain featuring bunkers, trenches, watchtowers, and natural choke points.</p>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-xl bg-tactical-accent/10 border border-tactical-accent/30 flex items-center justify-center text-tactical-accent mb-4 group-hover:bg-tactical-accent group-hover:text-black transition-colors">
+                            <i data-lucide="package-check" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Rental Armory</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">High-grade Specna Arms & G&G AEG rental packages with anti-fog thermal face shields included.</p>
+                    </div>
+
+                    <!-- Feature Card 4 -->
+                    <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-xl bg-tactical-accent/10 border border-tactical-accent/30 flex items-center justify-center text-tactical-accent mb-4 group-hover:bg-tactical-accent group-hover:text-black transition-colors">
+                            <i data-lucide="gauge" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Strict Chrono Safety</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Mandatory Joules check before entry. Equalized, safe, and honest gameplay guaranteed for all players.</p>
+                    </div>
+                </div>
+
+                <!-- Detailed Rules & Safety Sub-Section -->
+                <div id="rules" class="mt-16 pt-12 border-t border-tactical-border/40 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 text-tactical-accent mb-3 font-mono font-bold text-sm">
+                            <i data-lucide="eye" class="w-5 h-5"></i> EYE & FACE PROTECTION
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">ANSI Z87.1 rated eye protection required at all times outside safe zones. Full mesh or rigid lower face masks are mandatory for under-18s and strongly recommended for all players.</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 text-tactical-accent mb-3 font-mono font-bold text-sm">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i> BANG RULE & ENGAGEMENT
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">Minimum Engagement Distance (MED): 0m for AEGs under 1.14J, 10m for DMRs (1.88J), and 20m for Sniper Rifles (2.32J). Call out 'BANG BANG' when within 2m behind unaware opponents.</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="flex items-center gap-3 text-tactical-accent mb-3 font-mono font-bold text-sm">
+                            <i data-lucide="flag" class="w-5 h-5"></i> HONOR & HIT CALLS
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">Airsoft is an honor sport. Direct hits to gear, weapons, or clothing count as a hit. Call 'HIT' loudly, raise your red dead-rag high, and proceed directly to respawn.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Chrono & FPS Rules Calculator -->
+        <section id="chrono" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-tactical-border/60 relative overflow-hidden">
+                <!-- Decorative Corner -->
+                <div class="absolute -top-12 -right-12 w-48 h-48 bg-tactical-accent/10 rounded-full blur-2xl"></div>
+
+                <div class="max-w-3xl mb-10">
+                    <span class="inline-flex items-center gap-1.5 text-xs font-mono text-tactical-accent uppercase tracking-widest mb-2">
+                        <i data-lucide="cpu" class="w-4 h-4"></i> CHRONO CALCULATOR
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">FIELD JOULE & FPS CALCULATOR</h2>
+                    <p class="text-gray-400 mt-2">Adjust BB weight and velocity (FPS) to instantly calculate kinetic energy ($J = \frac{1}{2} m v^2$) and check weapon compliance.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Controls Column -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- BB Weight Selection -->
+                        <div>
+                            <label class="flex justify-between text-sm font-medium text-gray-300 mb-2">
+                                <span>BB Gram Weight (g)</span>
+                                <span id="bbWeightValue" class="font-mono text-tactical-accent font-bold">0.20 g</span>
+                            </label>
+                            <div class="grid grid-cols-5 gap-2 mb-3">
+                                <button onclick="setBBWeight(0.20)" class="bb-btn px-2 py-2 text-xs font-mono rounded-lg bg-tactical-card border border-tactical-border hover:border-tactical-accent text-white active-bb" data-weight="0.20">0.20g</button>
+                                <button onclick="setBBWeight(0.25)" class="bb-btn px-2 py-2 text-xs font-mono rounded-lg bg-tactical-card border border-tactical-border hover:border-tactical-accent text-white" data-weight="0.25">0.25g</button>
+                                <button onclick="setBBWeight(0.28)" class="bb-btn px-2 py-2 text-xs font-mono rounded-lg bg-tactical-card border border-tactical-border hover:border-tactical-accent text-white" data-weight="0.28">0.28g</button>
+                                <button onclick="setBBWeight(0.30)" class="bb-btn px-2 py-2 text-xs font-mono rounded-lg bg-tactical-card border border-tactical-border hover:border-tactical-accent text-white" data-weight="0.30">0.30g</button>
+                                <button onclick="setBBWeight(0.32)" class="bb-btn px-2 py-2 text-xs font-mono rounded-lg bg-tactical-card border border-tactical-border hover:border-tactical-accent text-white" data-weight="0.32">0.32g</button>
+                            </div>
+                            <input type="range" id="bbWeightSlider" min="0.12" max="0.50" step="0.01" value="0.20" class="w-full accent-tactical-accent bg-tactical-card rounded-lg h-2 cursor-pointer">
+                        </div>
+
+                        <!-- Velocity (FPS) Slider -->
+                        <div>
+                            <div class="flex justify-between text-sm font-medium text-gray-300 mb-2">
+                                <span>Muzzle Velocity (FPS)</span>
+                                <span id="fpsValue" class="font-mono text-tactical-accent font-bold">350 FPS</span>
+                            </div>
+                            <input type="range" id="fpsSlider" min="100" max="600" step="1" value="350" class="w-full accent-tactical-accent bg-tactical-card rounded-lg h-2 cursor-pointer">
+                            <div class="flex justify-between text-[11px] font-mono text-gray-500 mt-1">
+                                <span>100 FPS</span>
+                                <span>350 FPS (Standard AEG)</span>
+                                <span>500 FPS (Sniper)</span>
+                                <span>600 FPS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Column -->
+                    <div class="lg:col-span-5 glass-panel p-6 rounded-2xl border border-tactical-border flex flex-col items-center text-center justify-center relative">
+                        <div class="text-xs font-mono text-gray-400 uppercase tracking-widest mb-1">Calculated Energy</div>
+                        <div id="jouleResult" class="text-5xl font-black font-mono text-tactical-accent my-2">1.14 J</div>
+                        
+                        <!-- Compliance Badge -->
+                        <div id="safetyBadge" class="mt-4 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-2 bg-tactical-neon/20 text-tactical-neon border border-tactical-neon/40">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                            <span>AEG / RIFLE APPROVED (&lt; 1.14J)</span>
+                        </div>
+
+                        <!-- Energy Reference Scale -->
+                        <div class="w-full mt-6 pt-6 border-t border-tactical-border text-left space-y-2 text-xs font-mono">
+                            <div class="flex justify-between text-gray-400">
+                                <span>AEG / Pistol Limit:</span>
+                                <span class="text-white">1.14 Joules (350 FPS w/ 0.20g)</span>
+                            </div>
+                            <div class="flex justify-between text-gray-400">
+                                <span>DMR Limit (Locked Semi):</span>
+                                <span class="text-white">1.88 Joules (450 FPS w/ 0.20g)</span>
+                            </div>
+                            <div class="flex justify-between text-gray-400">
+                                <span>Sniper Limit (Bolt Action):</span>
+                                <span class="text-white">2.32 Joules (500 FPS w/ 0.20g)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Schedule & Live Countdown -->
+        <section id="events" class="py-20 bg-tactical-card/30 border-t border-tactical-border/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-mono text-tactical-accent uppercase tracking-widest mb-2">TACTICAL OPERATIONS</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">UPCOMING SKIRMISH SCHEDULE</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                    <!-- Countdown Timer Block -->
+                    <div class="lg:col-span-5 glass-panel p-8 rounded-3xl border border-tactical-accent/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-tactical-card to-tactical-bg">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-tactical-accent/20 text-tactical-accent text-xs font-mono font-bold uppercase tracking-wider inline-block mb-4">NEXT SKIRMISH</span>
+                            <h3 class="text-2xl font-black text-white uppercase">OPERATION: NIGHTFALL SIEGE</h3>
+                            <p class="text-gray-400 text-sm mt-2">Night CQB skirmish featuring VIP extraction and objective flag control under tactical low-light conditions.</p>
+                        </div>
+
+                        <!-- Timer Box -->
+                        <div class="my-8">
+                            <div class="text-xs font-mono text-gray-400 uppercase tracking-wider mb-3">T-MINUS UNTIL DEPLOYMENT</div>
+                            <div class="grid grid-cols-4 gap-3 text-center">
+                                <div class="bg-tactical-card p-3 rounded-xl border border-tactical-border">
+                                    <div id="timerDays" class="text-3xl font-black font-mono text-tactical-accent">00</div>
+                                    <div class="text-[10px] text-gray-400 uppercase font-mono mt-1">Days</div>
+                                </div>
+                                <div class="bg-tactical-card p-3 rounded-xl border border-tactical-border">
+                                    <div id="timerHours" class="text-3xl font-black font-mono text-tactical-accent">00</div>
+                                    <div class="text-[10px] text-gray-400 uppercase font-mono mt-1">Hours</div>
+                                </div>
+                                <div class="bg-tactical-card p-3 rounded-xl border border-tactical-border">
+                                    <div id="timerMinutes" class="text-3xl font-black font-mono text-tactical-accent">00</div>
+                                    <div class="text-[10px] text-gray-400 uppercase font-mono mt-1">Mins</div>
+                                </div>
+                                <div class="bg-tactical-card p-3 rounded-xl border border-tactical-border">
+                                    <div id="timerSeconds" class="text-3xl font-black font-mono text-tactical-accent">00</div>
+                                    <div class="text-[10px] text-gray-400 uppercase font-mono mt-1">Secs</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#contact" class="w-full py-3.5 rounded-xl bg-tactical-accent hover:bg-tactical-accentHover text-black font-bold text-center transition-colors flex items-center justify-center gap-2">
+                            <i data-lucide="user-plus" class="w-4 h-4"></i>
+                            Register For Sunday Game
+                        </a>
+                    </div>
+
+                    <!-- Upcoming Games List -->
+                    <div class="lg:col-span-7 space-y-4 flex flex-col justify-between">
+                        <!-- Event Card 1 -->
+                        <div class="glass-panel p-5 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-tactical-accent/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 rounded-xl bg-tactical-card border border-tactical-border text-tactical-accent font-mono text-center min-w-[64px]">
+                                    <div class="text-xs text-gray-400 uppercase">SUN</div>
+                                    <div class="text-xl font-bold">10</div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white">Sunday Open Skirmish</h4>
+                                    <p class="text-xs text-gray-400 flex items-center gap-2 mt-1">
+                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-tactical-accent"></i> 09:00 - 16:30
+                                        <span>•</span>
+                                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-tactical-accent"></i> BAT Arena Main Field
+                                    </p>
+                                </div>
+                            </div>
+                            <a href="#contact" class="px-4 py-2 rounded-lg text-xs font-bold border border-tactical-border hover:border-tactical-accent text-gray-200 hover:text-white transition-colors">Book Spot</a>
+                        </div>
+
+                        <!-- Event Card 2 -->
+                        <div class="glass-panel p-5 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-tactical-accent/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 rounded-xl bg-tactical-card border border-tactical-border text-tactical-accent font-mono text-center min-w-[64px]">
+                                    <div class="text-xs text-gray-400 uppercase">SAT</div>
+                                    <div class="text-xl font-bold">16</div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white">Milsim Operations: Sector 7</h4>
+                                    <p class="text-xs text-gray-400 flex items-center gap-2 mt-1">
+                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-tactical-accent"></i> 10:00 - 18:00
+                                        <span>•</span>
+                                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-tactical-accent"></i> Woodland & Trench Zone
+                                    </p>
+                                </div>
+                            </div>
+                            <a href="#contact" class="px-4 py-2 rounded-lg text-xs font-bold border border-tactical-border hover:border-tactical-accent text-gray-200 hover:text-white transition-colors">Book Spot</a>
+                        </div>
+
+                        <!-- Event Card 3 -->
+                        <div class="glass-panel p-5 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-tactical-accent/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="p-3 rounded-xl bg-tactical-card border border-tactical-border text-tactical-accent font-mono text-center min-w-[64px]">
+                                    <div class="text-xs text-gray-400 uppercase">FRI</div>
+                                    <div class="text-xl font-bold">22</div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white">Friday Night CQB Low-Light</h4>
+                                    <p class="text-xs text-gray-400 flex items-center gap-2 mt-1">
+                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-tactical-accent"></i> 18:00 - 22:00
+                                        <span>•</span>
+                                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-tactical-accent"></i> Urban Indoor Arena
+                                    </p>
+                                </div>
+                            </div>
+                            <a href="#contact" class="px-4 py-2 rounded-lg text-xs font-bold border border-tactical-border hover:border-tactical-accent text-gray-200 hover:text-white transition-colors">Book Spot</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Loadout Builder & Gear Checklist -->
+        <section id="loadout" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-mono text-tactical-accent uppercase tracking-widest mb-2">GEAR CHECKLIST</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">INTERACTIVE LOADOUT BUILDER</p>
+                <p class="text-gray-400 mt-2">Ensure you never leave vital airsoft gear behind. Check off items or add custom equipment to your personal loadout list.</p>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-tactical-border">
+                <!-- Progress Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-tactical-border">
+                    <div>
+                        <span class="text-xs font-mono text-gray-400 uppercase">Loadout Readiness</span>
+                        <div class="flex items-center gap-3 mt-1">
+                            <div class="w-48 sm:w-64 bg-tactical-card h-3 rounded-full overflow-hidden border border-tactical-border">
+                                <div id="loadoutProgressBar" class="bg-gradient-to-r from-tactical-accent to-yellow-400 h-full w-0 transition-all duration-300"></div>
+                            </div>
+                            <span id="loadoutProgressText" class="font-mono text-sm font-bold text-tactical-accent">0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Controls -->
+                    <div class="flex items-center gap-2">
+                        <button onclick="resetLoadout()" class="px-3 py-2 text-xs font-medium rounded-lg bg-tactical-card hover:bg-tactical-border text-gray-300 transition-colors flex items-center gap-1.5">
+                            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Custom Add Form -->
+                <form id="addGearForm" class="mt-6 flex gap-2">
+                    <input type="text" id="customGearInput" placeholder="Add custom gear item (e.g. Tracer Unit, Flashlight)..." class="flex-grow px-4 py-2.5 rounded-xl bg-tactical-card border border-tactical-border text-white text-sm focus:outline-none focus:border-tactical-accent">
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-tactical-accent hover:bg-tactical-accentHover text-black font-bold text-sm transition-colors flex items-center gap-1.5">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Add
+                    </button>
+                </form>
+
+                <!-- Checklist Grid -->
+                <div id="gearList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
+                    <!-- Dynamic items rendered via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Booking Form Section -->
+        <section id="contact" class="py-20 bg-tactical-card/40 border-t border-tactical-border/40">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-tactical-border relative overflow-hidden">
+                    <div class="text-center max-w-2xl mx-auto mb-10">
+                        <span class="text-xs font-mono text-tactical-accent uppercase tracking-widest">JOIN THE ACTION</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">BOOK GAME TICKETS & INQUIRIES</h2>
+                        <p class="text-gray-400 text-sm mt-2">Reserve your skirmish spot or send our field marshals a direct message.</p>
+                    </div>
+
+                    <form id="bookingForm" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Player Full Name</label>
+                                <input type="text" required placeholder="John 'Ghost' Price" class="w-full px-4 py-3 rounded-xl bg-tactical-card border border-tactical-border text-white text-sm focus:outline-none focus:border-tactical-accent">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Email Address</label>
+                                <input type="email" required placeholder="operator@bat-airsoft.online" class="w-full px-4 py-3 rounded-xl bg-tactical-card border border-tactical-border text-white text-sm focus:outline-none focus:border-tactical-accent">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Preferred Game Date</label>
+                                <select required class="w-full px-4 py-3 rounded-xl bg-tactical-card border border-tactical-border text-white text-sm focus:outline-none focus:border-tactical-accent">
+                                    <option value="">Select Operational Date</option>
+                                    <option value="sun-10">Sunday Open Skirmish (10th)</option>
+                                    <option value="sat-16">Milsim Ops Sector 7 (16th)</option>
+                                    <option value="fri-22">Friday Night CQB (22nd)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Rental Equipment Required?</label>
+                                <select class="w-full px-4 py-3 rounded-xl bg-tactical-card border border-tactical-border text-white text-sm focus:outline-none focus:border-tactical-accent">
+                                    <option value="none">No - I have my own gear</option>
+                                    <option value="full">Yes - Full Package (AEG + Mask + BBs)</option>
+                                    <option value="mask">Yes - Mask Only</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Message or Team Notes</label>
+                            <textarea rows="4" placeholder="Mention squad member count, special requests, or questions..." class="w-full px-4 py-3 rounded-xl bg-tactical-card border border-tactical-border text-white text-sm focus:outline-none focus:border-tactical-accent"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-tactical-accent hover:bg-tactical-accentHover text-black font-extrabold text-sm uppercase tracking-wider transition-all shadow-xl shadow-tactical-accent/20 flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            Transmit Booking Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-tactical-card/80 border-t border-tactical-border/60 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-tactical-accent/10 rounded-lg border border-tactical-accent/30">
+                    <i data-lucide="crosshair" class="w-5 h-5 text-tactical-accent"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-black tracking-wider text-white">BAT AIRSOFT</span>
+                    <span class="block text-[10px] font-mono text-gray-400">bat-airsoft.online</span>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="flex flex-wrap justify-center gap-6 text-xs text-gray-400 font-medium">
+                <a href="#about" class="hover:text-tactical-accent transition-colors">Field Rules</a>
+                <a href="#chrono" class="hover:text-tactical-accent transition-colors">Joule Limits</a>
+                <a href="#events" class="hover:text-tactical-accent transition-colors">Events</a>
+                <a href="#loadout" class="hover:text-tactical-accent transition-colors">Checklist</a>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-xs text-gray-500 font-mono text-center md:text-right">
+                &copy; 2026 BAT Airsoft. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal Confirmation Box -->
+    <div id="bookingModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-8 rounded-3xl border border-tactical-accent/40 max-w-md w-full text-center space-y-4">
+            <div class="w-16 h-16 bg-tactical-accent/10 border border-tactical-accent/40 rounded-full flex items-center justify-center mx-auto text-tactical-accent">
+                <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-black text-white">BOOKING TRANSMITTED!</h3>
+            <p class="text-sm text-gray-300">Your reservation request has been received. Our team will verify game slot availability and contact you via email shortly.</p>
+            <button onclick="closeModal()" class="w-full py-3 rounded-xl bg-tactical-accent hover:bg-tactical-accentHover text-black font-bold text-sm transition-colors">
+                Acknowledged
+            </button>
+        </div>
     </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // ----------------------------------------------------
+        // CHRONO & FPS JOULE CALCULATOR LOGIC
+        // ----------------------------------------------------
+        let currentWeight = 0.20;
+        let currentFPS = 350;
+
+        const fpsSlider = document.getElementById('fpsSlider');
+        const bbWeightSlider = document.getElementById('bbWeightSlider');
+        const fpsValue = document.getElementById('fpsValue');
+        const bbWeightValue = document.getElementById('bbWeightValue');
+        const jouleResult = document.getElementById('jouleResult');
+        const safetyBadge = document.getElementById('safetyBadge');
+
+        function updateJoules() {
+            // Formula: Energy (Joules) = 0.5 * m(kg) * v(m/s)^2
+            // m in kg = weight in grams / 1000
+            // v in m/s = FPS * 0.3048
+            const massKg = currentWeight / 1000;
+            const velocityMs = currentFPS * 0.3048;
+            const joules = 0.5 * massKg * (velocityMs * velocityMs);
+
+            jouleResult.textContent = joules.toFixed(2) + ' J';
+
+            // Safety Compliance Rules
+            if (joules <= 1.14) {
+                safetyBadge.className = "mt-4 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-2 bg-tactical-neon/20 text-tactical-neon border border-tactical-neon/40";
+                safetyBadge.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>AEG / RIFLE APPROVED (&lt; 1.14J)</span>`;
+            } else if (joules <= 1.88) {
+                safetyBadge.className = "mt-4 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-2 bg-yellow-500/20 text-yellow-400 border border-yellow-500/40";
+                safetyBadge.innerHTML = `<i data-lucide="alert-triangle" class="w-4 h-4"></i><span>DMR ONLY - SEMI LOCKED (&lt; 1.88J)</span>`;
+            } else if (joules <= 2.32) {
+                safetyBadge.className = "mt-4 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-2 bg-orange-500/20 text-orange-400 border border-orange-500/40";
+                safetyBadge.innerHTML = `<i data-lucide="shield-alert" class="w-4 h-4"></i><span>SNIPER BOLT-ACTION (&lt; 2.32J)</span>`;
+            } else {
+                safetyBadge.className = "mt-4 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-2 bg-tactical-alert/20 text-tactical-alert border border-tactical-alert/40";
+                safetyBadge.innerHTML = `<i data-lucide="x-circle" class="w-4 h-4"></i><span>OVER FIELD LIMIT / UNSAFE</span>`;
+            }
+            lucide.createIcons();
+        }
+
+        function setBBWeight(weight) {
+            currentWeight = weight;
+            bbWeightSlider.value = weight;
+            bbWeightValue.textContent = weight.toFixed(2) + ' g';
+            
+            document.querySelectorAll('.bb-btn').forEach(btn => {
+                if (parseFloat(btn.dataset.weight) === weight) {
+                    btn.classList.add('border-tactical-accent', 'bg-tactical-accent/20', 'text-tactical-accent');
+                } else {
+                    btn.classList.remove('border-tactical-accent', 'bg-tactical-accent/20', 'text-tactical-accent');
+                }
+            });
+            updateJoules();
+        }
+
+        fpsSlider.addEventListener('input', (e) => {
+            currentFPS = parseInt(e.target.value);
+            fpsValue.textContent = currentFPS + ' FPS';
+            updateJoules();
+        });
+
+        bbWeightSlider.addEventListener('input', (e) => {
+            setBBWeight(parseFloat(e.target.value));
+        });
+
+        // Initialize Calculator
+        setBBWeight(0.20);
+
+        // ----------------------------------------------------
+        // COUNTDOWN TIMER LOGIC
+        // ----------------------------------------------------
+        const targetDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000); // 3 days 14 hrs from now
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) return;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('timerDays').textContent = String(days).padStart(2, '0');
+            document.getElementById('timerHours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('timerMinutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('timerSeconds').textContent = String(seconds).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ----------------------------------------------------
+        // LOADOUT BUILDER & CHECKLIST LOGIC
+        // ----------------------------------------------------
+        const defaultGear = [
+            { id: 1, name: "Full Face Mask / Eye Protection", checked: true },
+            { id: 2, name: "Primary Replica & Charged Batteries", checked: true },
+            { id: 3, name: "Sidearm & Green Gas / CO2", checked: false },
+            { id: 4, name: "Extra Mid-Cap Magazines", checked: true },
+            { id: 5, name: "Speedloader & High Quality BBs", checked: false },
+            { id: 6, name: "Tactical Boots & Ankle Support", checked: true },
+            { id: 7, name: "Hydration Pack / Water Bottle", checked: false },
+            { id: 8, name: "Dead Rag (Red Marker Cloth)", checked: false }
+        ];
+
+        let gearItems = JSON.parse(localStorage.getItem('bat_airsoft_loadout')) || defaultGear;
+
+        function saveAndRenderGear() {
+            localStorage.setItem('bat_airsoft_loadout', JSON.stringify(gearItems));
+            const listContainer = document.getElementById('gearList');
+            listContainer.innerHTML = '';
+
+            let checkedCount = 0;
+
+            gearItems.forEach(item => {
+                if (item.checked) checkedCount++;
+
+                const card = document.createElement('div');
+                card.className = `p-3.5 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                    item.checked 
+                    ? 'bg-tactical-accent/10 border-tactical-accent/40 text-white' 
+                    : 'bg-tactical-card border-tactical-border text-gray-400 hover:border-gray-500'
+                }`;
+                card.onclick = () => toggleGear(item.id);
+
+                card.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-5 h-5 rounded flex items-center justify-center border ${
+                            item.checked ? 'bg-tactical-accent border-tactical-accent text-black' : 'border-gray-600'
+                        }">
+                            ${item.checked ? '<i data-lucide="check" class="w-3.5 h-3.5"></i>' : ''}
+                        </div>
+                        <span class="text-xs font-medium ${item.checked ? 'line-through text-gray-300' : ''}">${item.name}</span>
+                    </div>
+                    <button onclick="event.stopPropagation(); deleteGear(${item.id})" class="text-gray-500 hover:text-tactical-alert p-1">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                `;
+                listContainer.appendChild(card);
+            });
+
+            // Update Progress Bar
+            const percent = gearItems.length === 0 ? 0 : Math.round((checkedCount / gearItems.length) * 100);
+            document.getElementById('loadoutProgressBar').style.width = percent + '%';
+            document.getElementById('loadoutProgressText').textContent = percent + '%';
+
+            lucide.createIcons();
+        }
+
+        function toggleGear(id) {
+            gearItems = gearItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
+            saveAndRenderGear();
+        }
+
+        function deleteGear(id) {
+            gearItems = gearItems.filter(item => item.id !== id);
+            saveAndRenderGear();
+        }
+
+        function resetLoadout() {
+            gearItems = defaultGear;
+            saveAndRenderGear();
+        }
+
+        document.getElementById('addGearForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('customGearInput');
+            if (input.value.trim() !== '') {
+                gearItems.push({
+                    id: Date.now(),
+                    name: input.value.trim(),
+                    checked: false
+                });
+                input.value = '';
+                saveAndRenderGear();
+            }
+        });
+
+        saveAndRenderGear();
+
+        // ----------------------------------------------------
+        // BOOKING FORM MODAL LOGIC
+        // ----------------------------------------------------
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('bookingModal').classList.remove('hidden');
+        });
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+            document.getElementById('bookingForm').reset();
+        }
+    </script>
 </body>
 </html>
